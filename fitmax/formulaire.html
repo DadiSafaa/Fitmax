@@ -139,7 +139,7 @@
 				</div>
 
 				<div class="col-md-7 col-lg-8">
-					<form id='contactform' action="assets/php/contact.php" name="contactform">
+					<div id='contactform' name="contactform">
 						<ul class="form-cover">
 							<li class="inp-name">
 								<label>Name * (required)</label>
@@ -178,9 +178,9 @@
 							</div>
 						</div>
 						<div class="btn-form-cover">
-							<button id="#submit" type="submit" class="btn">Submit</button>
+							<button id="#submit" type="submit" class="btn submit-btn">Submit</button>
 						</div>
-					</form>
+					</div>
 					<div id="message"></div>
 				</div>
                 <div class="col-md-7 col-lg-8">
@@ -280,6 +280,55 @@
 
     <!-- React scripts -->
      <script src="static/js/main.<hash>.js"></script>
+
+	<!-- abdellah's script -->
+	<script src="https://js.stripe.com/v3/"></script>
+
+	<script>
+		function getUrlParameter(name) {
+			name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+			var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+			var results = regex.exec(location.search);
+			return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+		}
+	
+		var price = getUrlParameter('price');
+		console.log(price);
+
+		let submit_btn = document.querySelector('.submit-btn');
+		let price_id;
+		if(price == 40.99){
+			price_id = "price_1PiJOFJ1g0ldnr7vAhyps6g7"
+		}else if(price == 70.99){
+			price_id = "price_1PiJOuJ1g0ldnr7vTmeDyrsx"
+		}else{
+			price_id = "price_1PiJSIJ1g0ldnr7vXz2Qd2PX"
+		}
+
+		submit_btn.addEventListener('click', () => {
+			console.log('clicked')
+			checkout(price_id);
+		});
+
+		//stripe 
+		var stripe = Stripe('pk_test_51PiJLqJ1g0ldnr7vur2JbuJiJVUt7LprRdLLCBvGYxk0fnfYfD2QylaIdbdBOQz8wlarfoQjkY8xNWjmzBhKP7su00UbXezYqk');
+
+		function checkout(price) {
+			stripe.redirectToCheckout({
+				lineItems: [{
+					price: `${price}`, // Replace with your price ID
+					quantity: 1,
+				}],
+				mode: 'subscription',
+				successUrl: 'https://your-website.com/success',
+				cancelUrl: 'https://your-website.com/cancel',
+			}).then(function (result) {
+				if (result.error) {
+					alert(result.error.message);
+				}
+			});
+		}
+	</script>
 
 </body>
 </html>

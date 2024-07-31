@@ -199,7 +199,7 @@
 							<li class="item-excluded">Access to locker rooms</li>
 						</ul>
 
-						<a href="formulaire.html" class="btn">order now</a>
+						<a href="formulaire.html" data-price="40.99" class="btn price-button">order now</a>
 					</div>
 				</div>
 				<div class="col-md-4 club-card-col">
@@ -216,7 +216,7 @@
 							<li class="item-excluded">Basic nutritional guidance</li>
 						</ul>
 
-						<a href="formulaire.html" class="btn">order now</a>
+						<a href="formulaire.html" data-price="70.99" class="btn price-button">order now</a>
 					</div>
 				</div>
 				<div class="col-md-4 club-card-col">
@@ -234,7 +234,7 @@
 						</ul>
 
 
-						<a href="formulaire.html" class="btn">order now</a>
+						<a href="formulaire.html" data-price="120.99" class="btn price-button">order now</a>
 					</div>
 				</div>
 			</div>
@@ -527,5 +527,20 @@
 	<!--=================== SCRIPT	===================-->
 	<script src="assets/js/jquery-2.2.4.min.js"></script>
 	<script src="assets/js/scripts.js"></script>
+
+	<!-- abdellah's script -->
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			var buttons = document.querySelectorAll('.price-button');
+			buttons.forEach(function(button) {
+				button.addEventListener('click', function(e) {
+					e.preventDefault();
+					var price = this.getAttribute('data-price');
+					var href = this.getAttribute('href');
+					window.location.href = href + '?price=' + price;
+				});
+			});
+		});
+	</script>
 </body>
 </html>
