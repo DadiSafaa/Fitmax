@@ -278,7 +278,7 @@
 							<div class="date">3 months</div>
 						</div>
 						<div class="club-card-text">Start your fitness journey with our flexible 3-month plan. Enjoy full access to our state-of-the-art facilities and personalized programs.</div>
-						<a href="formulaire.html" class="btn">order now</a>
+						<a href="formulaire.html" data-price="220" class="btn price-button">order now</a>
 					</div>
 				</div>
 				<div class="col-md-4 club-card-col">
@@ -288,7 +288,7 @@
 							<div class="date">6 months</div>
 						</div>
 						<div class="club-card-text">Commit to your health and see real results with our 6-month plan. You'll benefit from extended access to all our premium features.</div>
-						<a href="formulaire.html" class="btn">order now</a>
+						<a href="formulaire.html" data-price="320" class="btn price-button">order now</a>
 					</div>
 				</div>
 				<div class="col-md-4 club-card-col">
@@ -299,7 +299,7 @@
 						</div>
 						<div class="club-card-text">Achieve lasting change with our best value 12-month plan. Gain continuous support and access to everything we offer for a full year.
 						</div>
-						<a href="formulaire.html" class="btn">order now</a>
+						<a href="formulaire.html" data-price="360" class="btn price-button">order now</a>
 					</div>
 				</div>
 			</div>
@@ -696,5 +696,20 @@
 	<script src="assets/js/slick.min.js"></script>
 	<script src="assets/js/rx-lazy.js"></script>
 	<script src="assets/js/scripts.js"></script>
+
+	<!-- abdellah's script -->
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			var buttons = document.querySelectorAll('.price-button');
+			buttons.forEach(function(button) {
+				button.addEventListener('click', function(e) {
+					e.preventDefault();
+					var price = this.getAttribute('data-price');
+					var href = this.getAttribute('href');
+					window.location.href = href + '?price=' + price;
+				});
+			});
+		});
+	</script>
 </body>
 </html>
